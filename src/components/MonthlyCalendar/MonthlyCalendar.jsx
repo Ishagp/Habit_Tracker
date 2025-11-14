@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
+import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
 const MonthlyCalendar = ({ completedDates }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -9,7 +11,6 @@ const MonthlyCalendar = ({ completedDates }) => {
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    // Previous and Next month navigation
     const prevMonth = () => {
         setCurrentDate(new Date(year, month - 1, 1));
     };
@@ -24,11 +25,13 @@ const MonthlyCalendar = ({ completedDates }) => {
 
     return (
         <div style={{
-            width: "300px",
+            width: "350px",
             padding: "20px",
             borderRadius: "12px",
             background: "#ffffff",
-            boxShadow: "0 2px 10px rgba(0,0,0,0.1)"
+            boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+            marginLeft: "160px",
+            height:""
         }}>
             {/* Header */}
             <div style={{
@@ -37,9 +40,12 @@ const MonthlyCalendar = ({ completedDates }) => {
                 alignItems: "center",
                 marginBottom: "15px"
             }}>
-                <button onClick={prevMonth}>◀</button>
+                <button style={{
+                    height:"20px"
+                }}
+                onClick={prevMonth}> <MdOutlineKeyboardDoubleArrowLeft /></button>
                 <h3>{currentDate.toLocaleString('default', { month: 'long' })} {year}</h3>
-                <button onClick={nextMonth}>▶</button>
+                <button onClick={nextMonth}><MdOutlineKeyboardDoubleArrowRight /></button>
             </div>
 
             {/* Weekdays */}

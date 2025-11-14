@@ -26,14 +26,14 @@ const Dashboard = ({ habits }) => {
                     <FiTarget className={styles.icon} />
                 </div>
 
-                <div className={styles.box}>
+                <div className={styles.box }>
                     <h2 className={styles.heading}>Current Streak</h2>
                     <p className={styles.bigNum}>{streak}</p>
                     <p className={styles.subtext}>Keep it up!</p>
                     <AiOutlineFire className={styles.icon} />
                 </div>
 
-                <div className={styles.box}>
+                <div className={styles.box }>
                     <h2 className={styles.heading}>Total Completion</h2>
                     <p className={styles.bigNum}>{completed}</p>
                     <p className={styles.subtext}>Great Job</p>

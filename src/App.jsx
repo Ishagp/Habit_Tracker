@@ -20,11 +20,24 @@ function App() {
     );
   };
 
+  const addHabit = (title) => {
+    const newHabit = {
+      id: Date.now(),
+      title,
+      completed: false
+    };
+    setHabits(prev => [...prev, newHabit]);
+  };
+
+  const deleteHabit = (id) => {
+    setHabits(prev => prev.filter(h => h.id !== id));
+  };
+
   return (
     <>
       <Navigation />
       <Dashboard habits={habits} />
-      <Habitlist habits={habits} toggleHabit={toggleHabit} />
+      <Habitlist habits={habits} toggleHabit={toggleHabit} addHabit={addHabit} deleteHabit={deleteHabit} />
     </>
   )
 }
