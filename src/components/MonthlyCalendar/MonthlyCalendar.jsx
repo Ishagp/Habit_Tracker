@@ -67,7 +67,7 @@ const MonthlyCalendar = ({ completedDates }) => {
                 textAlign: "center",
                 gap: "8px"
             }}>
-                {/* Empty boxes before 1st */}
+                
                 {Array(firstDay).fill(null).map((_, i) => (
                     <div key={"empty-" + i}></div>
                 ))}

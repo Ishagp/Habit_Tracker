@@ -25,7 +25,6 @@ const Dashboard = ({ habits }) => {
                     <p className={styles.subtext}>{completionRate}% complete</p>
                     <FiTarget className={styles.icon} />
                 </div>
-
                 <div className={styles.box }>
                     <h2 className={styles.heading}>Current Streak</h2>
                     <p className={styles.bigNum}>{streak}</p>
