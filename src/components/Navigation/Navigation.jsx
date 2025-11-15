@@ -1,6 +1,7 @@
 import styles from './Navigation.module.css';
 import { BsList } from "react-icons/bs";
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 
 const Navigation = () => {
@@ -12,7 +13,7 @@ const Navigation = () => {
             <nav className={styles.navbar}>
                 <h2 className={styles.title}>HabitTracker</h2>
                 <ul className={styles.links}>
-                    <li className={styles.link}>Your Habits</li>
+                    <li> <Link to="/your-habits" className={styles.link}>Your Habits</Link></li>
                     <li className={styles.link}>Report</li>
                     <li className={styles.lists}>
                         <BsList

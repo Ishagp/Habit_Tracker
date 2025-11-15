@@ -1,0 +1,48 @@
+.container {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+}
+
+.heading {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.searchBar {
+  padding: 10px 12px;
+  width: 250px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.habitList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.habitCard {
+  padding: 12px;
+  background: #f2f2f2;
+  border-radius: 12px;
+  font-size: 17px;
+}
+
+.add_btn {
+  background: linear-gradient(135deg, #4ac6d9, #61d89f);
+  color: white;
+  border-radius: 15px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  height: 50px;
+}
+
+.add_btn:hover {
+  background: linear-gradient(135deg, #4bb6c6, #5fb68c);
+}
