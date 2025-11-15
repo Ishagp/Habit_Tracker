@@ -30,10 +30,10 @@ const Navigation = () => {
             )} */}
 
             {/* Side Drawer  */}
-            <div className={`fixed top-[66px] right-0 h-full w-64 bg-white text-gray-800 shadow-lg transform ${isOpen ? "translate-x-0" : "translate-x-full"
+            <div className={`fixed top-[66px] right-0 h-fit-content w-64 bg-white text-gray-800 shadow-lg transform ${isOpen ? "translate-x-0" : "translate-x-full"
                 } transition-transform duration-300 ease-in-out z-50`}
             >
-                <div className="p-4 border-b flex justify-between items-center">
+                <div className="p-3 border-b flex justify-between items-center">
                     <h2 className='text-lg font-semibold'>Menu</h2>
                     <button
                         className="text-gray-500 hover:text-gray-700 text-xl"
@@ -45,6 +45,8 @@ const Navigation = () => {
 
                 <ul className="flex flex-col p-4 gap-4">
                     <li className="hover:text-blue-600 cursor-pointer">Profile</li>
+                    <li className="hover:text-blue-600 cursor-pointer">Timer</li>
+                    <li className="hover:text-blue-600 cursor-pointer">Categories</li>
                     <li className="hover:text-blue-600 cursor-pointer">Settings</li>
                     <li className="hover:text-blue-600 cursor-pointer">About</li>
                     <li className="hover:text-blue-600 cursor-pointer">Log Out</li>

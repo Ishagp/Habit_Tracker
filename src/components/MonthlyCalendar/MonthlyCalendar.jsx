@@ -31,7 +31,7 @@ const MonthlyCalendar = ({ completedDates }) => {
             background: "#ffffff",
             boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
             marginLeft: "160px",
-            height:""
+            height: ""
         }}>
             {/* Header */}
             <div style={{
@@ -41,9 +41,9 @@ const MonthlyCalendar = ({ completedDates }) => {
                 marginBottom: "15px"
             }}>
                 <button style={{
-                    height:"20px"
+                    height: "20px"
                 }}
-                onClick={prevMonth}> <MdOutlineKeyboardDoubleArrowLeft /></button>
+                    onClick={prevMonth}> <MdOutlineKeyboardDoubleArrowLeft /></button>
                 <h3>{currentDate.toLocaleString('default', { month: 'long' })} {year}</h3>
                 <button onClick={nextMonth}><MdOutlineKeyboardDoubleArrowRight /></button>
             </div>
@@ -67,7 +67,7 @@ const MonthlyCalendar = ({ completedDates }) => {
                 textAlign: "center",
                 gap: "8px"
             }}>
-                
+
                 {Array(firstDay).fill(null).map((_, i) => (
                     <div key={"empty-" + i}></div>
                 ))}
