@@ -9,9 +9,9 @@ import { Routes, Route } from "react-router-dom";
 function App() {
 
   const [habits, setHabits] = useState([
-    { id: 1, title: "Morning Exercise", completed: false },
-    { id: 2, title: "Read Books", completed: false },
-    { id: 3, title: "Drink Water", completed: false },
+    { id: 1, title: "Morning Exercise",description:"Do it daily for 30 min", completed: false },
+    { id: 2, title: "Read Books",description:"Do it daily for 30 min", completed: false },
+    { id: 3, title: "Drink Water",description:"Do it daily for 30 min", completed: false },
   ]);
 
   const toggleHabit = (id) => {

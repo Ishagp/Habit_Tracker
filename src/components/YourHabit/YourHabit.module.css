@@ -1,8 +1,16 @@
 .container {
   padding: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   height: fit-content;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .heading {
@@ -23,7 +31,10 @@
 .habitList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
+  width: 250px;
+  margin: auto;
+  margin-top: 0;
 }
 
 .habitCard {
@@ -46,3 +57,19 @@
 .add_btn:hover {
   background: linear-gradient(135deg, #4bb6c6, #5fb68c);
 }
+
+.allHabits {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fullHabitCard {
+  padding: 14px;
+  background: #f2f2f2;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+

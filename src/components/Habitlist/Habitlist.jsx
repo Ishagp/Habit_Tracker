@@ -44,6 +44,7 @@ const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
                     {habits.map(habit => (
                         <div
                             key={habit.id}
+
                             style={{
                                 padding: "1rem",
                                 background: habit.completed ? "#d4f8d4" : "#f2f2f2",
@@ -51,11 +52,16 @@ const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
                                 borderRadius: "10px",
                                 display: "flex",
                                 justifyContent: "space-between",
-                                alignItems: "center"
+                                alignItems: "center",
+                                cursor: "pointer"
                             }}
                         >
-                            <span>{habit.title}</span>
-
+                            <div className={styles.HabitName}>
+                                <span>{habit.title}</span>
+                                <p style={{ fontSize: "14px", color: "gray", marginTop: "5px" }}>
+                                    {habit.description}
+                                </p>
+                            </div>
                             <div style={{ display: "flex", gap: "10px" }}>
                                 <input
                                     type="checkbox"
