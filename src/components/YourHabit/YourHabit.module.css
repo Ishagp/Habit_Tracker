@@ -10,13 +10,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  margin-bottom: 20px;
+  /* justify-content: flex-start; */
+  /* margin-bottom: 20px; */
 }
 
 .heading {
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
+  margin: 0; 
 }
 
 .searchBar {
@@ -24,7 +26,8 @@
   width: 250px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  margin: 0; 
   font-size: 16px;
 }
 
@@ -33,8 +36,9 @@
   flex-direction: column;
   gap: 8px;
   width: 250px;
-  margin: auto;
-  margin-top: 0;
+  /* margin: auto; */
+  margin-top: 10px;
+  margin-left: 0;
 }
 
 .habitCard {
@@ -60,16 +64,24 @@
 
 .allHabits {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-wrap: wrap;
+  height: 250px;
+  gap: 20px;
+  /* background-color: yellow; */
+  height: fit-content;
+  margin-top: 30px;
 }
 
 .fullHabitCard {
-  padding: 14px;
-  background: #f2f2f2;
+  width:500px;
+  /* padding: 18px; */
+  background: #f4eeee;
   border-radius: 12px;
   font-size: 18px;
   font-weight: 500;
+  margin-left: 100px;
+  margin-right: 50px;
+  height: 250px;
 }
 
 

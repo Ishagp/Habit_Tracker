@@ -31,7 +31,7 @@ const YourHabit = ({ habits }) => {
             + Add New Habit
           </button>
         </div>
-        
+
         {/* Habits List */}
         <div className={styles.habitList}>
           {search.trim() !== "" && filteredHabits.map((habit) => (
@@ -44,6 +44,7 @@ const YourHabit = ({ habits }) => {
       </div>
 
       {/* Full Habit List below container */}
+
       <div className={styles.allHabits}>
         {habits.map((habit) => (
           <div key={habit.id} className={styles.fullHabitCard}>
