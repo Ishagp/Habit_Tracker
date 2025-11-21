@@ -10,15 +10,19 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  /* justify-content: flex-start; */
   /* margin-bottom: 20px; */
 }
 
 .heading {
   font-size: 28px;
   font-weight: bold;
-  /* margin-bottom: 15px; */
-  margin: 0; 
+  margin: 0;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .searchBar {
@@ -26,19 +30,22 @@
   width: 250px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  /* margin-bottom: 20px; */
-  margin: 0; 
+  margin: 0;
   font-size: 16px;
 }
 
 .habitList {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 250px;
-  /* margin: auto; */
-  margin-top: 10px;
-  margin-left: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
 .habitCard {
@@ -46,6 +53,11 @@
   background: #f2f2f2;
   border-radius: 12px;
   font-size: 17px;
+  cursor: pointer;
+}
+
+.habitCard:hover {
+  background: #f1f1f1;
 }
 
 .add_btn {
@@ -63,25 +75,111 @@
 }
 
 .allHabits {
-  display: flex;
-  flex-wrap: wrap;
-  height: 250px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards in a row */
   gap: 20px;
-  /* background-color: yellow; */
-  height: fit-content;
+  width: 100%;
   margin-top: 30px;
 }
 
 .fullHabitCard {
-  width:500px;
-  /* padding: 18px; */
   background: #f4eeee;
   border-radius: 12px;
   font-size: 18px;
   font-weight: 500;
-  margin-left: 100px;
-  margin-right: 50px;
-  height: 250px;
+  height: 230px;        
+  padding: 18px;
+  max-width: 420px;     
+  width: 100%;          
+  margin: 0 auto;       
+  box-sizing: border-box;
 }
 
 
+@media (max-width: 900px) {
+  .allHabits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .allHabits {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+/* Modal Background */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+/* Modal Box */
+.modalBox {
+  width: 350px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Emoji Grid */
+.emojiGrid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.emojiItem {
+  font-size: 24px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  background: #f2f2f2;
+}
+
+.activeEmoji {
+  background: #d1e7ff;
+}
+
+/* Input Box */
+.inputBox {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Modal Buttons */
+.modalButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.cancelBtn {
+  background: #ccc;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submitBtn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
