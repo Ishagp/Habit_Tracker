@@ -10,7 +10,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  /* margin-bottom: 20px; */
 }
 
 .heading {
@@ -76,7 +75,8 @@
 
 .allHabits {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cards in a row */
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 cards in a row */
   gap: 20px;
   width: 100%;
   margin-top: 30px;
@@ -87,11 +87,11 @@
   border-radius: 12px;
   font-size: 18px;
   font-weight: 500;
-  height: 230px;        
+  height: 230px;
   padding: 18px;
-  max-width: 420px;     
-  width: 100%;          
-  margin: 0 auto;       
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 

@@ -73,6 +73,8 @@ const YourHabit = ({ habits, addHabit }) => {
         {habits.map((habit) => (
           <div key={habit.id} className={styles.fullHabitCard}>
             {habit.title}
+            <p >{habit.description}</p>
+            
           </div>
         ))}
       </div>
