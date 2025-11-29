@@ -83,7 +83,7 @@
 }
 
 .fullHabitCard {
-  background: #f4eeee;
+  background: #f2f2f2;
   border-radius: 12px;
   font-size: 18px;
   font-weight: 500;
@@ -95,6 +95,11 @@
   box-sizing: border-box;
 }
 
+.fullHabitCard p{
+  font-size: 14px;
+  color: gray;
+  margin-top: 5px;
+}
 
 @media (max-width: 900px) {
   .allHabits {

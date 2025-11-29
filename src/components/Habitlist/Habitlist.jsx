@@ -1,15 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from './Habitlist.module.css';
 import MonthlyCalendar from '../MonthlyCalendar/MonthlyCalendar';
 import { MdDelete } from "react-icons/md";
 
 const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
-
     const [showModal, setShowModal] = useState(false);
     const [newHabit, setNewHabit] = useState("");
     const [selectedEmoji, setSelectedEmoji] = useState("🔥");
 
     const emojiList = ["🔥", "💧", "📚", "🏃‍♀️", "🌿", "💤", "🧘‍♀️", "👨‍🎓", "✏️", "🔬", "😊", "🎨", "🎯", "🥛", "🌸"];
+
+    //Calendar ke liye completed dates ka state
+    const [completedDates, setCompletedDates] = useState(() => {
+        const stored = localStorage.getItem("completedDates");
+        return stored ? JSON.parse(stored) : [];
+    });
+
+    //Jab bhi completedDates change ho, localStorage update karo
+    useEffect(() => {
+        localStorage.setItem("completedDates", JSON.stringify(completedDates));
+    }, [completedDates]);
+
+    const todayStr = new Date().toISOString().split("T")[0];
+
+    const handleToggleHabit = (habit) => {
+        const newCompleted = !habit.completed;
+
+        if (newCompleted) {
+
+            setCompletedDates((prev) =>
+                prev.includes(todayStr) ? prev : [...prev, todayStr]
+            );
+        } else {
+            const anyOtherCompleted = habits.some(
+                (h) => h.id !== habit.id && h.completed
+            );
+
+            if (!anyOtherCompleted) {
+
+                setCompletedDates((prev) => prev.filter((d) => d !== todayStr));
+            }
+        }
+
+        toggleHabit(habit.id);
+    };
 
     const handleSubmit = () => {
         if (newHabit.trim() === "") return;
@@ -27,7 +61,6 @@ const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
             gap: "40px",
             alignItems: "flex-start"
         }}>
-
             <div className={styles.container}>
                 <div className={styles.title}>
                     <h1 className={styles.heading}>Today's Habits</h1>
@@ -44,7 +77,6 @@ const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
                     {habits.map(habit => (
                         <div
                             key={habit.id}
-
                             style={{
                                 padding: "1rem",
                                 background: habit.completed ? "#d4f8d4" : "#f2f2f2",
@@ -66,7 +98,7 @@ const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
                                 <input
                                     type="checkbox"
                                     checked={habit.completed}
-                                    onChange={() => toggleHabit(habit.id)}
+                                    onChange={() => handleToggleHabit(habit)}
                                 />
 
                                 <button
@@ -87,9 +119,9 @@ const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
                 </div>
             </div>
 
-            <MonthlyCalendar completedDates={["2025-11-13", "2025-11-11"]} />
+            <MonthlyCalendar completedDates={completedDates} />
 
-            {/* Popup div */}
+            {/* Popup div*/}
             {showModal && (
                 <div style={{
                     position: "fixed",

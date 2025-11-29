@@ -74,7 +74,7 @@ const YourHabit = ({ habits, addHabit }) => {
           <div key={habit.id} className={styles.fullHabitCard}>
             {habit.title}
             <p >{habit.description}</p>
-            
+
           </div>
         ))}
       </div>
