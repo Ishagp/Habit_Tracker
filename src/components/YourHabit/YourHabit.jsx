@@ -2,19 +2,21 @@ import { useState } from "react";
 import styles from "./YourHabit.module.css";
 import { toast } from "react-toastify";
 
-
 const YourHabit = ({ habits, addHabit }) => {
   const [search, setSearch] = useState("");
-
   const [showModal, setShowModal] = useState(false);
   const [newHabit, setNewHabit] = useState("");
+  const [newDescription, setNewDescription] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState("🔥");
+
+  const [habitStats] = useState(() => {
+    const stored = localStorage.getItem("habitStats");
+    return stored ? JSON.parse(stored) : {};
+  });
 
   const emojiList = ["🔥", "💧", "📚", "🏃‍♀️", "🌿", "💤", "🧘‍♀️", "👨‍🎓", "✏️", "🔬", "😊", "🎨", "🎯", "🥛", "🌸"];
 
-
-  // Filter habits based on search text
-  const filteredHabits = habits.filter(habit =>
+  const filteredHabits = habits.filter((habit) =>
     habit.title.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -23,10 +25,14 @@ const YourHabit = ({ habits, addHabit }) => {
       toast.error("Please enter a habit name!");
       return;
     }
-    addHabit(selectedEmoji + " " + newHabit);
+    addHabit({
+      title: selectedEmoji + " " + newHabit,
+      description: newDescription
+    });
     toast.success("Habit added successfully! 🎉");
 
     setNewHabit("");
+    setNewDescription("");
     setSelectedEmoji("🔥");
     setShowModal(false);
   };
@@ -37,7 +43,6 @@ const YourHabit = ({ habits, addHabit }) => {
         <div className={styles.topRow}>
           <h1 className={styles.heading}>Your Habits</h1>
 
-          {/* Search Bar */}
           <div className={styles.searchWrapper}>
             <input
               type="text"
@@ -47,16 +52,42 @@ const YourHabit = ({ habits, addHabit }) => {
               className={styles.searchBar}
             />
 
-            {/* Habits List */}
             <div className={styles.habitList}>
-              {search.trim() !== "" && filteredHabits.map((habit) => (
-                <div key={habit.id} className={styles.habitCard}>
-                  {habit.title}
-                </div>
-              ))}
+              {search.trim() !== "" &&
+                filteredHabits.map((habit) => {
+                  const stats = habitStats[habit.id] || {};
+                  const streak = stats.streak || 0;
+
+                  return (
+                    <div key={habit.id} className={styles.habitCard}>
+                      <span>{habit.title}</span>
+                      {habit.description && (
+                        <p
+                          style={{
+                            fontSize: "14px",
+                            color: "gray",
+                            marginTop: "4px",
+                          }}
+                        >
+                          {habit.description}
+                        </p>
+                      )}
+                      {streak > 0 && (
+                        <p
+                          style={{
+                            fontSize: "14px",
+                            color: "#05a35a",
+                            marginTop: "4px",
+                          }}
+                        >
+                          🔥 Streak: {streak} days
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
             </div>
           </div>
-
 
           <button
             className={styles.add_btn}
@@ -67,19 +98,38 @@ const YourHabit = ({ habits, addHabit }) => {
         </div>
       </div>
 
-      {/* Full Habit List below container */}
-
       <div className={styles.allHabits}>
-        {habits.map((habit) => (
-          <div key={habit.id} className={styles.fullHabitCard}>
-            {habit.title}
-            <p >{habit.description}</p>
+        {habits.map((habit) => {
+          const stats = habitStats[habit.id] || {};
+          const streak = stats.streak || 0;
 
-          </div>
-        ))}
+          return (
+            <div key={habit.id} className={styles.fullHabitCard}>
+              {streak > 0 && (
+                <div className={styles.streakBadge}>
+                  🔥 {streak}
+                </div>
+              )}
+
+              <span>{habit.title}</span>
+
+              {habit.description && (
+                <p
+                  style={{
+                    fontSize: "14px",
+                    color: "gray",
+                    marginTop: "4px",
+                  }}
+                >
+                  {habit.description}
+                </p>
+              )}
+
+            </div>
+          );
+        })}
       </div>
 
-      {/* Popup Modal */}
       {showModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalBox}>
@@ -90,7 +140,8 @@ const YourHabit = ({ habits, addHabit }) => {
               {emojiList.map((emoji, i) => (
                 <span
                   key={i}
-                  className={`${styles.emojiItem} ${selectedEmoji === emoji ? styles.activeEmoji : ""}`}
+                  className={`${styles.emojiItem} ${selectedEmoji === emoji ? styles.activeEmoji : ""
+                    }`}
                   onClick={() => setSelectedEmoji(emoji)}
                 >
                   {emoji}
@@ -106,19 +157,28 @@ const YourHabit = ({ habits, addHabit }) => {
               className={styles.inputBox}
             />
 
+            <input
+              type="text"
+              placeholder="Enter description"
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+              className={styles.inputBox}
+            />
+
             <div className={styles.modalButtons}>
-              <button className={styles.cancelBtn} onClick={() => setShowModal(false)}>
+              <button
+                className={styles.cancelBtn}
+                onClick={() => setShowModal(false)}
+              >
                 Cancel
               </button>
               <button className={styles.submitBtn} onClick={handleSubmit}>
                 Add Habit
               </button>
             </div>
-
           </div>
         </div>
       )}
-
     </>
   );
 };
