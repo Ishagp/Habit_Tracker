@@ -34,6 +34,7 @@ const computeStreak = (dates) => {
 const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
     const [showModal, setShowModal] = useState(false);
     const [newHabit, setNewHabit] = useState("");
+    const [newDescription, setNewDescription] = useState("");
     const [selectedEmoji, setSelectedEmoji] = useState("🔥");
 
     const emojiList = ["🔥", "💧", "📚", "🏃‍♀️", "🌿", "💤", "🧘‍♀️", "👨‍🎓", "✏️", "🔬", "😊", "🎨", "🎯", "🥛", "🌸"];
@@ -111,8 +112,12 @@ const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
 
     const handleSubmit = () => {
         if (newHabit.trim() === "") return;
-        addHabit(selectedEmoji + " " + newHabit);
+        addHabit({
+            title: selectedEmoji + " " + newHabit,
+            description: newDescription,
+        });
         setNewHabit("");
+        setNewDescription("");
         setSelectedEmoji("🔥");
         setShowModal(false);
     };
@@ -251,6 +256,19 @@ const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
                             placeholder="Enter habit name"
                             value={newHabit}
                             onChange={(e) => setNewHabit(e.target.value)}
+                            style={{
+                                width: "100%",
+                                padding: "10px",
+                                borderRadius: "8px",
+                                border: "1px solid #ccc",
+                            }}
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Enter description"
+                            value={newDescription}
+                            onChange={(e) => setNewDescription(e.target.value)}
                             style={{
                                 width: "100%",
                                 padding: "10px",

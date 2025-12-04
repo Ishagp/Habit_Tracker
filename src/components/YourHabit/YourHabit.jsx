@@ -61,28 +61,6 @@ const YourHabit = ({ habits, addHabit }) => {
                   return (
                     <div key={habit.id} className={styles.habitCard}>
                       <span>{habit.title}</span>
-                      {habit.description && (
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            color: "gray",
-                            marginTop: "4px",
-                          }}
-                        >
-                          {habit.description}
-                        </p>
-                      )}
-                      {streak > 0 && (
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            color: "#05a35a",
-                            marginTop: "4px",
-                          }}
-                        >
-                          🔥 Streak: {streak} days
-                        </p>
-                      )}
                     </div>
                   );
                 })}
@@ -124,6 +102,8 @@ const YourHabit = ({ habits, addHabit }) => {
                   {habit.description}
                 </p>
               )}
+
+              
 
             </div>
           );
