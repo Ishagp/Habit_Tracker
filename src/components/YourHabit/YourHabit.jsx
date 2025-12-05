@@ -1,12 +1,15 @@
 import { useState } from "react";
 import styles from "./YourHabit.module.css";
 import { toast } from "react-toastify";
+import { MdDelete, MdEdit, MdCalendarMonth } from "react-icons/md";
 
-const YourHabit = ({ habits, addHabit }) => {
+
+const YourHabit = ({ habits, addHabit, deleteHabit, onEditHabit, onOpenCalendar }) => {
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [newHabit, setNewHabit] = useState("");
   const [newDescription, setNewDescription] = useState("");
+  const [frequency, setFrequency] = useState("Daily");
   const [selectedEmoji, setSelectedEmoji] = useState("🔥");
 
   const [habitStats] = useState(() => {
@@ -27,14 +30,28 @@ const YourHabit = ({ habits, addHabit }) => {
     }
     addHabit({
       title: selectedEmoji + " " + newHabit,
-      description: newDescription
+      description: newDescription,
+      frequency: frequency,
     });
     toast.success("Habit added successfully! 🎉");
 
     setNewHabit("");
     setNewDescription("");
+    setFrequency("Daily");
     setSelectedEmoji("🔥");
     setShowModal(false);
+  };
+
+  const handleDelete = (id) => {
+    if (deleteHabit) deleteHabit(id);
+  };
+
+  const handleEdit = (habit) => {
+    if (onEditHabit) onEditHabit(habit);
+  };
+
+  const handleCalendar = (habit) => {
+    if (onOpenCalendar) onOpenCalendar(habit);
   };
 
   return (
@@ -94,7 +111,7 @@ const YourHabit = ({ habits, addHabit }) => {
               {habit.description && (
                 <p
                   style={{
-                    fontSize: "14px",
+                    fontSize: "15px",
                     color: "gray",
                     marginTop: "4px",
                   }}
@@ -103,7 +120,67 @@ const YourHabit = ({ habits, addHabit }) => {
                 </p>
               )}
 
-              
+              <p
+                style={{
+                  fontSize: "15px",
+                  color: "gray",
+                  marginTop: "4px",
+                  // fontStyle: "italic",
+                }}
+              >
+                Frequency: {habit.frequency || "Daily"}
+              </p>
+
+              {/* icons of delete, edit and calendar */}
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: "10px",
+                  marginTop: "8px",
+                }}
+              >
+                <button
+                  onClick={() => handleEdit(habit)}
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                  }}
+                  title="Edit habit"
+                >
+                  <MdEdit />
+                </button>
+
+                <button
+                  onClick={() => handleCalendar(habit)}
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                  }}
+                  title="Open calendar"
+                >
+                  <MdCalendarMonth />
+                </button>
+
+                <button
+                  onClick={() => handleDelete(habit.id)}
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                  }}
+                  title="Delete habit"
+                >
+                  <MdDelete />
+                </button>
+              </div>
+
 
             </div>
           );
@@ -144,6 +221,17 @@ const YourHabit = ({ habits, addHabit }) => {
               onChange={(e) => setNewDescription(e.target.value)}
               className={styles.inputBox}
             />
+
+            <p>Frequency:</p>
+            <select
+              className={styles.inputBox}
+              value={frequency}
+              onChange={(e) => setFrequency(e.target.value)}
+            >
+              <option value="Daily">Daily</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Monthly">Monthly</option>
+            </select>
 
             <div className={styles.modalButtons}>
               <button

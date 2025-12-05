@@ -12,9 +12,9 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
 
   const [habits, setHabits] = useState([
-    { id: 1, title: "🧘‍♀️ Morning Exercise", description: "Do it daily for 30 min", completed: false },
-    { id: 2, title: "📚 Read Books", description: "Do it daily for 1 hr", completed: false },
-    { id: 3, title: "🥛 Drink Water", description: "Drinking Water keeps body hydrated ", completed: false },
+    { id: 1, title: "🧘‍♀️ Morning Exercise", description: "Do it daily for 30 min", frequency: "Daily", completed: false },
+    { id: 2, title: "📚 Read Books", description: "Do it daily for 1 hr", frequency: "Daily", completed: false },
+    { id: 3, title: "🥛 Drink Water", description: "Drinking Water keeps body hydrated ", frequency: "Daily", completed: false },
   ]);
 
   const toggleHabit = (id) => {
@@ -30,16 +30,29 @@ function App() {
       id: Date.now(),
       title: habitObj.title,
       description: habitObj.description || "",
+      frequency: habitObj.frequency || "Daily",
       completed: false,
     };
 
-    setHabits(prev => [...prev, newHabit]);
-    localStorage.setItem("habits", JSON.stringify([...habits, newHabit]));
+    setHabits(prev => {
+      const updated = [...prev, newHabit];
+      localStorage.setItem("habits", JSON.stringify(updated));
+      return updated;
+    });
   };
 
 
   const deleteHabit = (id) => {
     setHabits(prev => prev.filter(h => h.id !== id));
+  };
+
+  const handleEditHabit = (habit) => {
+    // abhi simple rakhte hain, baad me edit modal add kar sakte ho
+    console.log("Edit habit:", habit);
+  };
+
+  const handleOpenHabitCalendar = (habit) => {
+    console.log("Open calendar for:", habit);
   };
 
   return (
@@ -64,7 +77,12 @@ function App() {
 
         <Route
           path="/your-habits"
-          element={<YourHabit habits={habits} addHabit={addHabit} />}
+          element={<YourHabit
+            habits={habits}
+            addHabit={addHabit}
+            deleteHabit={deleteHabit}
+            onEditHabit={handleEditHabit}
+            onOpenCalendar={handleOpenHabitCalendar} />}
         />
       </Routes>
     </>

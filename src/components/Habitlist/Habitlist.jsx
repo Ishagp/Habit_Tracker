@@ -223,7 +223,10 @@ const Habitlist = ({ habits, toggleHabit, addHabit, deleteHabit }) => {
                             boxShadow: "0 0 20px rgba(0,0,0,0.2)",
                         }}
                     >
-                        <h2>Add New Habit</h2>
+                        <h2 style={{
+                            textAlign: "center",
+                            fontWeight: "600"
+                        }}>Add New Habit</h2>
 
                         <p>Select Emoji:</p>
                         <div

@@ -87,7 +87,7 @@
   border-radius: 12px;
   font-size: 18px;
   font-weight: 500;
-  height: 230px;
+  height: 150px;
   padding: 18px;
   max-width: 420px;
   width: 100%;
@@ -117,7 +117,7 @@
 }
 
 
-.fullHabitCard p{
+.fullHabitCard p {
   font-size: 14px;
   color: gray;
   margin-top: 5px;
@@ -159,6 +159,16 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
+.modalBox h2 {
+  text-align: center;
+  font-weight: 600;
+}
+
+.modalBox p {
+  font-weight: 400;
+  font-size: 15px;
+}
+
 /* Emoji Grid */
 .emojiGrid {
   display: flex;
@@ -185,6 +195,7 @@
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  margin-top: 5px;
 }
 
 /* Modal Buttons */
