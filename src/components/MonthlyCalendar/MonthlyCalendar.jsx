@@ -33,7 +33,7 @@ const MonthlyCalendar = ({ completedDates }) => {
             marginLeft: "160px",
             height: ""
         }}>
-            {/* Header */}
+            
             <div style={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -48,7 +48,6 @@ const MonthlyCalendar = ({ completedDates }) => {
                 <button onClick={nextMonth}><MdOutlineKeyboardDoubleArrowRight /></button>
             </div>
 
-            {/* Weekdays */}
             <div style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(7, 1fr)",
@@ -60,7 +59,6 @@ const MonthlyCalendar = ({ completedDates }) => {
                 <div>Thu</div><div>Fri</div><div>Sat</div>
             </div>
 
-            {/* Dates grid */}
             <div style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(7, 1fr)",
@@ -72,7 +70,6 @@ const MonthlyCalendar = ({ completedDates }) => {
                     <div key={"empty-" + i}></div>
                 ))}
 
-                {/* Days */}
                 {Array.from({ length: daysInMonth }, (_, i) => {
                     const day = i + 1;
                     const dateStr = formatDate(day);

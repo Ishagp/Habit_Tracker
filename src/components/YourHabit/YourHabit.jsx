@@ -125,13 +125,11 @@ const YourHabit = ({ habits, addHabit, deleteHabit, onEditHabit, onOpenCalendar 
                   fontSize: "15px",
                   color: "gray",
                   marginTop: "4px",
-                  // fontStyle: "italic",
+                  
                 }}
               >
                 Frequency: {habit.frequency || "Daily"}
               </p>
-
-              {/* icons of delete, edit and calendar */}
 
               <div
                 style={{

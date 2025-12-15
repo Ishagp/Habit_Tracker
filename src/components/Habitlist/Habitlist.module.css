@@ -12,9 +12,9 @@
     /* font-weight: 800; */
 }
 
-.HabitName span{
+.HabitName span {
     font-weight: 500;
-    
+
 }
 
 .heading {
@@ -36,6 +36,22 @@
 }
 
 
+.cancelbtn {
+    background-color: #ccc;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.addbtn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
 /* Tablets */
 @media (max-width: 992px) {

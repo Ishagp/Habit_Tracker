@@ -1,20 +1,19 @@
-.container{
+.container {
     width: 100%;
     padding: 2rem 3rem;
 }
 
-.boxes{
+.boxes {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
-    
 }
 
 .box {
     background: white;
     padding: 1.8rem;
     border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     position: relative;
     transition: 0.3s ease;
 }
@@ -58,7 +57,6 @@
     opacity: 0.6;
 }
 
-/* for tablet */
 @media (max-width: 1024px) {
     .boxes {
         grid-template-columns: repeat(2, 1fr);
@@ -69,7 +67,6 @@
     }
 }
 
-/* Mobile mode  */
 @media (max-width: 768px) {
     .boxes {
         grid-template-columns: 1fr;
