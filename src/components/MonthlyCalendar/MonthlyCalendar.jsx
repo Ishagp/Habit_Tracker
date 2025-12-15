@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
-import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
+import { useState } from "react";
+import styles from "./MonthlyCalendar.module.css";
+import { MdOutlineKeyboardDoubleArrowLeft, MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
 const MonthlyCalendar = ({ completedDates }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -24,69 +24,34 @@ const MonthlyCalendar = ({ completedDates }) => {
     };
 
     return (
-        <div style={{
-            width: "350px",
-            padding: "20px",
-            borderRadius: "12px",
-            background: "#ffffff",
-            boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-            marginLeft: "160px",
-            height: ""
-        }}>
-            
-            <div style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "15px"
-            }}>
-                <button style={{
-                    height: "20px"
-                }}
-                    onClick={prevMonth}> <MdOutlineKeyboardDoubleArrowLeft /></button>
-                <h3>{currentDate.toLocaleString('default', { month: 'long' })} {year}</h3>
+        <div className={styles.calendar}>
+            <div className={styles.header}>
+                <button onClick={prevMonth}><MdOutlineKeyboardDoubleArrowLeft /></button>
+                <h3>
+                    {currentDate.toLocaleString("default", { month: "long" })} {year}
+                </h3>
                 <button onClick={nextMonth}><MdOutlineKeyboardDoubleArrowRight /></button>
             </div>
 
-            <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(7, 1fr)",
-                textAlign: "center",
-                fontWeight: "bold",
-                marginBottom: "10px"
-            }}>
+            <div className={styles.weekdays}>
                 <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
                 <div>Thu</div><div>Fri</div><div>Sat</div>
             </div>
 
-            <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(7, 1fr)",
-                textAlign: "center",
-                gap: "8px"
-            }}>
-
+            <div className={styles.days}>
                 {Array(firstDay).fill(null).map((_, i) => (
-                    <div key={"empty-" + i}></div>
+                    <div key={i}></div>
                 ))}
 
                 {Array.from({ length: daysInMonth }, (_, i) => {
                     const day = i + 1;
                     const dateStr = formatDate(day);
-
                     const isCompleted = completedDates.includes(dateStr);
 
                     return (
                         <div
                             key={day}
-                            style={{
-                                padding: "8px",
-                                borderRadius: "6px",
-                                background: isCompleted ? "#61d89f" : "#eee",
-                                color: isCompleted ? "white" : "black",
-                                cursor: "pointer",
-                                fontWeight: "500"
-                            }}
+                            className={`${styles.day} ${isCompleted ? styles.completed : ""}`}
                         >
                             {day}
                         </div>

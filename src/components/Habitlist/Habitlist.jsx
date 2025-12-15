@@ -3,7 +3,6 @@ import styles from "./Habitlist.module.css";
 import MonthlyCalendar from "../MonthlyCalendar/MonthlyCalendar";
 import { MdDelete } from "react-icons/md";
 
-/* Date */
 const getTodayStr = () => new Date().toISOString().split("T")[0];
 
 const getYesterdayStr = () => {
@@ -12,7 +11,6 @@ const getYesterdayStr = () => {
     return d.toISOString().split("T")[0];
 };
 
-/*Streak*/
 const computeStreak = (dates) => {
     if (!dates || dates.length === 0) return 0;
 
@@ -42,7 +40,6 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
         "👨‍🎓", "✏️", "🔬", "😊", "🎨", "🎯", "🥛", "🌸"
     ];
 
-    /*Calendar + stats state */
     const [completedDates, setCompletedDates] = useState(() => {
         const stored = localStorage.getItem("calendarCompletedDates");
         return stored ? JSON.parse(stored) : [];
@@ -54,10 +51,7 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
     });
 
     useEffect(() => {
-        localStorage.setItem(
-            "calendarCompletedDates",
-            JSON.stringify(completedDates)
-        );
+        localStorage.setItem("calendarCompletedDates", JSON.stringify(completedDates));
     }, [completedDates]);
 
     useEffect(() => {
@@ -66,7 +60,6 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
 
     const todayStr = getTodayStr();
 
-    /* Toggle habit for TODAY */
     const handleToggleHabit = (habit) => {
         const isCompletedToday =
             habitStats[habit.id]?.completedDates?.includes(todayStr) || false;
@@ -86,18 +79,11 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
 
             if (newCompleted) {
                 completedDatesForHabit.push(todayStr);
-
-                const yesterdayStr = getYesterdayStr();
-                if (lastCompletedDate === yesterdayStr) {
-                    streak += 1;
-                } else {
-                    streak = 1;
-                }
+                if (lastCompletedDate === getYesterdayStr()) streak += 1;
+                else streak = 1;
                 lastCompletedDate = todayStr;
             } else {
-                completedDatesForHabit = completedDatesForHabit.filter(
-                    (d) => d !== todayStr
-                );
+                completedDatesForHabit = completedDatesForHabit.filter(d => d !== todayStr);
                 streak = computeStreak(completedDatesForHabit);
                 lastCompletedDate =
                     completedDatesForHabit[completedDatesForHabit.length - 1] || null;
@@ -113,21 +99,18 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
             };
         });
 
-        if (newCompleted) {
-            setCompletedDates((prev) =>
-                prev.includes(todayStr) ? prev : [...prev, todayStr]
-            );
-        } else {
-            setCompletedDates((prev) => prev.filter((d) => d !== todayStr));
-        }
+        setCompletedDates(prev =>
+            newCompleted
+                ? [...new Set([...prev, todayStr])]
+                : prev.filter(d => d !== todayStr)
+        );
     };
 
-    /* Add habit */
     const handleSubmit = () => {
-        if (newHabit.trim() === "") return;
+        if (!newHabit.trim()) return;
 
         addHabit({
-            title: selectedEmoji + " " + newHabit,
+            title: `${selectedEmoji} ${newHabit}`,
             description: newDescription,
         });
 
@@ -137,22 +120,18 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
         setShowModal(false);
     };
 
-
     return (
-        <div style={{ display: "flex", gap: "40px", alignItems: "flex-start" }}>
+        <div className={styles.wrapper}>
             <div className={styles.container}>
                 <div className={styles.title}>
                     <h1 className={styles.heading}>Today's Habits</h1>
-                    <button
-                        className={styles.add_btn}
-                        onClick={() => setShowModal(true)}
-                    >
+                    <button className={styles.add_btn} onClick={() => setShowModal(true)}>
                         + Add New Habit
                     </button>
                 </div>
 
                 <div style={{ marginTop: "2rem" }}>
-                    {habits.map((habit) => {
+                    {habits.map(habit => {
                         const isCompletedToday =
                             habitStats[habit.id]?.completedDates?.includes(todayStr) || false;
 
@@ -172,13 +151,7 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
                                 <div className={styles.HabitName}>
                                     <span>{habit.title}</span>
                                     {habit.description && (
-                                        <p
-                                            style={{
-                                                fontSize: "14px",
-                                                color: "gray",
-                                                marginTop: "5px",
-                                            }}
-                                        >
+                                        <p style={{ fontSize: "14px", color: "gray", marginTop: "5px" }}>
                                             {habit.description}
                                         </p>
                                     )}
@@ -190,14 +163,9 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
                                         checked={isCompletedToday}
                                         onChange={() => handleToggleHabit(habit)}
                                     />
-
                                     <button
-                                        style={{
-                                            border: "none",
-                                            background: "transparent",
-                                            cursor: "pointer",
-                                        }}
                                         onClick={() => deleteHabit(habit.id)}
+                                        style={{ border: "none", background: "transparent", cursor: "pointer" }}
                                     >
                                         <MdDelete />
                                     </button>
@@ -210,7 +178,6 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
 
             <MonthlyCalendar completedDates={completedDates} />
 
-            {/*Add Habit*/}
             {showModal && (
                 <div
                     style={{
@@ -223,17 +190,9 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
                         zIndex: 100,
                     }}
                 >
-                    <div
-                        style={{
-                            width: "350px",
-                            background: "white",
-                            padding: "20px",
-                            borderRadius: "15px",
-                        }}
-                    >
+                    <div style={{ width: "350px", background: "white", padding: "20px", borderRadius: "15px" }}>
                         <h2 style={{ textAlign: "center" }}>Add New Habit</h2>
 
-                        <p>Select Emoji:</p>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                             {emojiList.map((emoji, i) => (
                                 <span
@@ -244,8 +203,7 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
                                         padding: "8px",
                                         cursor: "pointer",
                                         borderRadius: "8px",
-                                        background:
-                                            selectedEmoji === emoji ? "#d1e7ff" : "#f2f2f2",
+                                        background: selectedEmoji === emoji ? "#d1e7ff" : "#f2f2f2",
                                     }}
                                 >
                                     {emoji}
@@ -254,28 +212,20 @@ const Habitlist = ({ habits, addHabit, deleteHabit }) => {
                         </div>
 
                         <input
-                            type="text"
-                            placeholder="Enter habit name"
                             value={newHabit}
                             onChange={(e) => setNewHabit(e.target.value)}
+                            placeholder="Enter habit name"
                             style={{ width: "100%", padding: "10px", marginTop: "10px" }}
                         />
 
                         <input
-                            type="text"
-                            placeholder="Enter description"
                             value={newDescription}
                             onChange={(e) => setNewDescription(e.target.value)}
+                            placeholder="Enter description"
                             style={{ width: "100%", padding: "10px", marginTop: "10px" }}
                         />
 
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                marginTop: "20px",
-                            }}
-                        >
+                        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px" }}>
                             <button className={styles.cancelbtn} onClick={() => setShowModal(false)}>Cancel</button>
                             <button className={styles.addbtn} onClick={handleSubmit}>Add Habit</button>
                         </div>

@@ -1,6 +1,12 @@
+.wrapper {
+    display: flex;
+    gap: 40px;
+    padding: 0 3rem;
+    align-items: flex-start;
+}
+
 .container {
-    width: 50%;
-    margin-left: 50px;
+    flex: 1;
 }
 
 .title {
@@ -8,13 +14,10 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    height: 50px;
-    /* font-weight: 800; */
 }
 
 .HabitName span {
     font-weight: 500;
-
 }
 
 .heading {
@@ -35,7 +38,6 @@
     background: linear-gradient(135deg, #4bb6c6, #5fb68c);
 }
 
-
 .cancelbtn {
     background-color: #ccc;
     border: none;
@@ -53,26 +55,23 @@
     cursor: pointer;
 }
 
-/* Tablets */
-@media (max-width: 992px) {
-    .container {
-        width: 70%;
-    }
-
-    .heading {
-        font-size: 1.3rem;
-    }
-
-    .add_btn {
-        padding: 8px 18px;
-        font-size: 0.95rem;
+@media (max-width: 1024px) {
+    .wrapper {
+        padding: 0 1.5rem;
+        gap: 30px;
     }
 }
 
-/* Mobiles*/
 @media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        padding: 0 1rem;
+        gap: 25px;
+    }
+
     .container {
-        width: 90%;
+        max-width: 100%;
+        width: 100%;
     }
 
     .title {
@@ -87,14 +86,13 @@
     }
 }
 
-/* Small mobiles*/
 @media (max-width: 480px) {
     .heading {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
     }
 
     .add_btn {
-        padding: 10px;
         font-size: 0.9rem;
+        padding: 10px;
     }
 }

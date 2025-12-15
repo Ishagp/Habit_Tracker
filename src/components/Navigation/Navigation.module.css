@@ -23,11 +23,29 @@
     cursor: pointer;
 }
 
-.link:hover{
+.link:hover {
     color: #bfdbfe;
     cursor: pointer;
 }
 
-.lists{
+.lists {
     font-size: 1.4rem;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .links li:first-child {
+        display: none;
+    }
+
+    .lists {
+        display: block;
+    }
 }
