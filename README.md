@@ -1,16 +1,51 @@
-# React + Vite
+# Habit Tracker App ✅
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and user-friendly Habit Tracker web application built using React and Vite.  
+This app helps users build consistency by tracking daily habits, streaks, and progress.
 
-Currently, two official plugins are available:
+# 🚀 Live Demo
+https://habit-tracker-puce-chi.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# 🛠 Tech Stack
+- React
+- Vite
+- JavaScript
+- CSS Modules
+- LocalStorage
+- Vercel
 
-## React Compiler
+# ✨ Features
+- Add and delete daily habits
+- Mark habits as completed
+- Automatic streak calculation
+- Dashboard with daily progress
+- Calendar view for habit history
+- Report section with visual insights
+- Persistent data using localStorage
+- Responsive UI
+- Setting features
+- Search bar
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📂 Project Structure
+src/
+│
+├── components/
+│ ├── Navigation/
+│ ├── Dashboard/
+│ ├── Habitlist/
+│ ├── MonthlyCalendar/
+│ ├── Profile/
+│ ├── Timer/
+│ ├── Categories/
+│ └── Settings/
+│
+├── App.jsx
+├── main.jsx
+└── index.css
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Future Improvements
+- User authentication (Login / Signup)
+- Cloud database integration
+- Habit reminders & notifications
+- Weekly & monthly reports with charts
+- Dark mode support
